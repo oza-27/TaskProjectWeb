@@ -11,8 +11,8 @@ using TaskProject.Data;
 namespace TaskProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230126024834_upgradeSelectListitem")]
-    partial class upgradeSelectListitem
+    [Migration("20230201043336_addUpgradedtodatabase")]
+    partial class addUpgradedtodatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

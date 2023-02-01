@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TaskProject.Migrations
 {
-    public partial class upgradeSelectListitem : Migration
+    public partial class addUpgradedtodatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

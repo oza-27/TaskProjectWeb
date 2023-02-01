@@ -14,5 +14,3 @@ outputCreate = (url, title) => {
         }
     })
 }
-
-jQuery('#formValidate').validation();

@@ -33,37 +33,19 @@ namespace TaskProject.Controllers
             return View();
         }
 
-        // POST: Category/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Create
         [HttpPost, ActionName("Create")]
         [ValidateAntiForgeryToken]
         public IActionResult Create(Category category)
         {
-            
-            if(category.Name == null)
-            {
-                ModelState.AddModelError("Name", "Please enter your name");
-            }
-            if(category.Description == null)
-            {
-                ModelState.AddModelError("Description", "Please enter description");
-            }
-            if (ModelState.IsValid)
-            {
-				_context.categories.Add(category);
-				_context.SaveChanges();
-				return RedirectToAction("Index");
-			}
-            return View(category);
+			_context.categories.Add(category);
+			_context.SaveChanges();
+			return RedirectToAction("Index");
         }
 
-        // GET: Category/Edit/5
+        // GET: Edit
         public IActionResult Edit(int id)
         {
-            //List<Category> ctList = _context.categories.ToList();
-            //ViewBag.Categorytbl = new SelectList(ctList, "CategoryId", "Name");
-
             var category = _context.categories.Find(id);
             var model = new Category
             {
@@ -81,21 +63,14 @@ namespace TaskProject.Controllers
             return View(category);
         }
 
-        // POST: Category/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Category category)
+        public IActionResult EditPOSt(Category category)
         {
-            if (ModelState.IsValid)
-            {
-                
-                _context.categories.Update(category);
-                _context.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(category);
+            _context.categories.Update(category);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // GET: Category/Delete/5
@@ -111,28 +86,12 @@ namespace TaskProject.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(Category obj)
         {
-            //var check = _context.categories.Where(modal => modal.ParentCategoryId == obj.CategoryId).ToList();
-            //foreach(var c in check)
-            //{
-            //    var subChild = _context.categories.Where(data=>data.ParentCategoryId == c.CategoryId).ToList();
-            //    foreach(var datx in subChild)
-            //    {
-            //        var subC = _context.categories.Where(data => data.ParentCategoryId == datx.CategoryId).ToList();
-            //        _context.RemoveRange(subC);
-            //    }
-            //    _context.RemoveRange(subChild);
-            //}
-            //_context.categories.RemoveRange(check);
-            //_context.categories.Remove(obj);
-            //_context.SaveChanges();
-            //return RedirectToAction("Index");
 
             var subCategoris = _context.categories.Where(modal => modal.ParentCategoryId == obj.CategoryId);
             _context.categories.RemoveRange(subCategoris);
-            var category = _context.categories.Find(obj.CategoryId);
-            _context.categories.Remove(category);
+            _context.categories.Remove(obj);
             _context.SaveChanges();
-            return View(category);
+            return RedirectToAction("Index");
         }
 
         // Get action for Subcategory
