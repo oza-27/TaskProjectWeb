@@ -1,0 +1,36 @@
+﻿IEnumerable<Category>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container pt-4 m-2">
+    <div class="row p-3">
+        <div class="col-6">
+            <h2 class="text-primary text-dark"> Category List </h2>
+        </div>
+        <div class="col-6 text-end">
+            <a class="btn btn-primary" onclick="outputCreate('@Url.Action("Create","Category", null, Context.Request.Scheme)', 'Create New Category')"> Create a New Category </a>
+        </div>
+    </div>
+    <table id="tblData" class="table table-bordered table-striped text-dark text-center p-2" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Status 
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+@section Scripts{
+    <script src="~/js/category.js"></script>
+}

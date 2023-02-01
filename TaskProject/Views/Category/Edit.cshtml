@@ -1,0 +1,63 @@
+﻿@model Category
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = null;
+}
+
+<form method="post" style="background-image:linear-gradient(red,white);">
+    <div class="border p-3 mt-4">
+        <input asp-for="CategoryId" hidden />
+        <div class="row pb-2">
+            <h2> Update Category </h2>
+            <hr />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Name"> Name </label>
+            <input asp-for="Name" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Description"> Description </label>
+            <input asp-for="Description" class="form-control" />
+        </div>
+
+        <div class="form-group form-check mb-3">
+            <label class="form-check-label">
+                <input class="form-check-input" asp-for="isActive" /> @Html.DisplayNameFor(model=>model.isActive)
+            </label>
+        </div>
+        <div class="mb-3">
+            @if(Model.ParentCategoryId != null)
+            {
+            
+                    <label asp-for="ParentCategoryId"></label>
+                    <select asp-for="ParentCategoryId">
+                        @foreach (var obj in ViewBag.message)
+                        {
+                        string values = obj.Value;
+                        string[] afterSplit = values.Split("$");
+
+                        @if(afterSplit[0]=="0" || Model.ParentCategoryId.ToString() == afterSplit[1])
+                        {
+                            <option value="@afterSplit[1]">@obj.Text</option>
+                        }
+                    }
+                </select>
+           
+            }
+        </div>
+        <button type="submit" style="width:150px" class="btn btn-primary"> Update </button>
+        <a class="btn btn-secondary" asp-controller="Category" asp-action="Index"> Back to List </a>
+    </div>
+</form>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
+
+
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
